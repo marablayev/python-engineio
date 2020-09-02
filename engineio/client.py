@@ -594,6 +594,7 @@ class Client(object):
 
     def _read_loop_polling(self):
         """Read packets by polling the Engine.IO server."""
+        self.logger.info('Read loop polling started.')
         while self.state == 'connected':
             self.logger.info(
                 'Sending polling GET request to ' + self.base_url)
@@ -682,6 +683,7 @@ class Client(object):
         """This background task sends packages to the server as they are
         pushed to the send queue.
         """
+        self.logger.info('Write loop started')
         while self.state == 'connected':
             # to simplify the timeout handling, use the maximum of the
             # ping interval and ping timeout as timeout, with an extra 5
