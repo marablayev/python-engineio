@@ -596,10 +596,11 @@ class Client(object):
         """Read packets by polling the Engine.IO server."""
         self.logger.info('Read loop polling started.')
         while self.state == 'connected':
+            url_timestamp = self._get_url_timestamp()
             self.logger.info(
-                'Sending polling GET request to ' + self.base_url)
+                'Sending polling GET request to ' + self.base_url + url_timestamp)
             r = self._send_request(
-                'GET', self.base_url + self._get_url_timestamp(),
+                'GET', self.base_url + url_timestamp,
                 timeout=max(self.ping_interval, self.ping_timeout) + 5)
             self.logger.info('Response: ')
             self.logger.info(r)
