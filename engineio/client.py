@@ -601,11 +601,15 @@ class Client(object):
             r = self._send_request(
                 'GET', self.base_url + self._get_url_timestamp(),
                 timeout=max(self.ping_interval, self.ping_timeout) + 5)
+            self.logger.info('Response: ')
+            self.logger.info(r)
             if r is None:
                 self.logger.warning(
                     'Connection refused by the server, aborting')
                 self.queue.put(None)
                 break
+            self.logger.info(r.status_code)
+            self.logger.info(r.content)
             if r.status_code < 200 or r.status_code >= 300:
                 self.logger.warning('Unexpected status code %s in server '
                                     'response, aborting', r.status_code)
