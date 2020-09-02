@@ -587,9 +587,9 @@ class Client(object):
                     self.ws.close(timeout=0)
                 self.queue.put(None)
                 break
-            self.pong_received = False
-            self._send_packet(packet.Packet(packet.PING))
-            self.ping_loop_event.wait(timeout=self.ping_interval)
+            #self.pong_received = False
+            #self._send_packet(packet.Packet(packet.PING))
+            #self.ping_loop_event.wait(timeout=self.ping_interval)
         self.logger.info('Exiting ping task')
 
     def _read_loop_polling(self):
